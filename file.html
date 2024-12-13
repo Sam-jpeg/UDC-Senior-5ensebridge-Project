@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>5enses Bridge</title>
+  <link rel="stylesheet" href="style.css">
+
+
+  <!-- TensorFlow.js and Handpose Model -->
+  <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@tensorflow-models/handpose"></script>
+</head>
+<!-- added12/1 -->
+
+<div id="signPage" class="page">
+  <div class="camera-section">
+    <p>Sign here</p>
+    <div class="camera" id="camera-container">
+      <video id="camera" autoplay playsinline></video>
+      <canvas id="camera-canvas"></canvas>
+    </div>
+    <div class="translation-section">
+      <p>English Translation: <span id="translationResult">[Translation will appear here]</span></p>
+    </div>
+    <!-- Button to toggle mirroring mode -->
+    <button onclick="toggleMirroring()">Toggle Mirroring</button>
+  </div>
+</div>
+
+<body>
+  <!-- Navigation Bar -->
+  <header>
+    <div class="logo">
+      <img src="IMG_0561.jpg" alt="5enses Bridge Logo">
+      
+      <span>5enses Bridge</span>
+    </div>
+    <nav>
+      <ul>
+        <li><a href="#" onclick="showPage('signPage')">Sign Page</a></li>
+        <li><a href="#" onclick="showPage('missionPage')">Our Mission</a></li>
+        <li><a href="#" onclick="showPage('feedbackPage')">Feedback</a></li>
+        <li><a href="#" onclick="showPage('howToUsePage')">How to Use</a></li>
+        <li><a href="#" onclick="showPage('aslResourcesPage')">ASL Resources</a></li>
+        <li><a href="#" onclick="showPage('meetTheCreatorsPage')">Meet The Creators</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <!-- Sign Language Detection Section -->
+  <div id="signPage" class="page">
+    <div class="camera-section">
+      <p>Sign here</p>
+      <div class="camera" id="camera-container">
+        <video id="camera" autoplay playsinline></video>
+        <canvas id="camera-canvas"></canvas> <!-- Canvas overlay for hand detection -->
+      </div>
+      <div class="translation-section">
+        <p>English Translation: <span id="translationResult">[Translation will appear here]</span></p>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- Our Mission Page -->
+  <div id="missionPage" class="page hidden">
+    <h2>Our Mission</h2>
+    <p>
+      Our mission is to bridge the communication gap between hearing and non-hearing individuals by providing innovative live sign language detection technology.
+      In today's world, real-time communication remains a challenge for those who rely on sign language, especially in situations where interpreters are unavailable or inaccessible.
+      This communication barrier limits access to essential services, social interaction, and opportunities for individuals in the Deaf and Hard of Hearing community.
+    </p>
+    <p>
+      Our goal is to break down these barriers by creating an inclusive and accessible environment through cutting-edge technology that can detect and translate sign language into spoken or written language in real time.
+      By doing so, we aim to foster better understanding, collaboration, and seamless interaction between hearing and non-hearing individuals across all areas of life—from education and healthcare to business and social spaces.
+    </p>
+    <p>
+      We believe that live sign language detection will empower the Deaf community, promote inclusivity, and ensure that everyone, regardless of their hearing ability, can communicate effortlessly in any environment.
+    </p>
+  </div>
+
+  <!-- Settings Page 
+      <li><a href="#" onclick="showPage('settingsPage')">Settings</a></li>
+  <div id="settingsPage" class="page hidden">
+    <h2>Settings</h2>
+    <p>Modify the app settings here.</p>
+  </div> -->
+
+ 
+ <!-- Feedback Page -->
+<div id="feedbackPage" class="page hidden">
+  <h2>Feedback</h2>
+  <p>We’d love to hear your thoughts! Please use the form below to share your feedback, suggestions, or report any issues you’ve encountered while using 5enses Bridge.</p>
+
+  <h3>1. Contact Information</h3>
+  <p>
+    <label for="userName">Name (optional):</label>
+    <input type="text" id="userName" placeholder="Your Name">
+  </p>
+  <p>
+    <label for="userEmail">Email (optional):</label>
+    <input type="email" id="userEmail" placeholder="Your Email">
+  </p>
+
+  <h3>2. Feedback Type</h3>
+  <p>Please select the type of feedback you're providing:</p>
+  <p>
+    <select id="feedbackType">
+      <option value="general">General Feedback</option>
+      <option value="suggestion">Feature Suggestion</option>
+      <option value="bug">Report a Bug</option>
+      <option value="other">Other</option>
+    </select>
+  </p>
+
+  <h3>3. Your Feedback</h3>
+  <p>
+    <label for="userFeedback">Comments:</label>
+    <textarea id="userFeedback" rows="5" placeholder="Enter your feedback here..."></textarea>
+  </p>
+
+  <h3>4. Satisfaction Rating</h3>
+  <p>How satisfied are you with 5enses Bridge?</p>
+  <p>
+    <label><input type="radio" name="satisfaction" value="very_satisfied"> Very Satisfied</label><br>
+    <label><input type="radio" name="satisfaction" value="satisfied"> Satisfied</label><br>
+    <label><input type="radio" name="satisfaction" value="neutral"> Neutral</label><br>
+    <label><input type="radio" name="satisfaction" value="dissatisfied"> Dissatisfied</label><br>
+    <label><input type="radio" name="satisfaction" value="very_dissatisfied"> Very Dissatisfied</label>
+  </p>
+
+  <h3>5. Submit Your Feedback</h3>
+  <p>Once you're ready, click the submit button below to send us your feedback. Thank you for helping us improve!</p>
+  <p>
+    <button onclick="submitFeedback()">Submit Feedback</button>
+  </p>
+</div>
+
+
+  <!-- How to Use Page -->
+
+<div id="howToUsePage" class="page hidden">
+  <h2>How to Use</h2>
+  <p>Welcome to 5enses Bridge! Here’s a quick guide on how to make the most of this application:</p>
+
+  <h3>1. Navigating the App</h3>
+  <p>
+    Use the navigation bar at the top of the page to explore different sections of the website.
+    <ul>
+      <li><strong>Sign Page</strong>: This is the main feature where you can use the sign language detection tool.</li>
+      <li><strong>Our Mission</strong>: Learn about the goals and purpose of 5enses Bridge.</li>
+      <li><strong>Settings</strong>: Adjust app settings to personalize your experience.</li>
+      <li><strong>Feedback</strong>: Share your thoughts and suggestions with us.</li>
+      <li><strong>How to Use</strong>: You’re here! This section explains how to use the website and its features.</li>
+      <li><strong>ASL Resources</strong>: Find additional resources to learn or improve your ASL skills.</li>
+      <li><strong>Meet The Creators</strong>: Get to know the team behind 5enses Bridge.</li>
+    </ul>
+  </p>
+
+  <h3>2. Using the Sign Language Detection Tool</h3>
+  <p>
+    <strong>Access the Tool</strong>: Go to the <strong>Sign Page</strong> by selecting it from the navigation bar.<br>
+    <strong>Allow Camera Access</strong>: When prompted, grant the website access to your camera. This is necessary for the app to detect hand gestures.<br>
+    <strong>Position Yourself</strong>: Ensure that your hand is clearly visible in the camera’s view. Position your hand in the center of the camera box, making sure it’s well-lit and in front of a plain background if possible for optimal detection.<br>
+    <strong>Start Signing</strong>: Begin signing ASL gestures within the camera’s frame. The app will analyze your hand movements and positions in real time.<br>
+    <strong>View Translations</strong>: As the app detects your gestures, the English translation of each recognized sign will appear below the camera feed. If the gesture is not recognized, it may display "Unknown Gesture" until the hand shape matches a known sign.
+  </p>
+
+  <h3>3. Interpreting the Results</h3>
+  <p>
+    The translation text below the camera feed will update based on the gesture detected.<br>
+    <strong>Recognized Signs</strong>: If the app identifies a gesture, it will display the corresponding English word or phrase (e.g., "I Love You").<br>
+    <strong>Unknown Gesture</strong>: If the app cannot identify the gesture, you may see "Unknown Gesture." Try adjusting the clarity of your hand position or consult the <strong>ASL Resources</strong> section for guidance on recognizable signs.
+  </p>
+
+  <h3>4. Troubleshooting Tips</h3>
+  <p>
+    <ul>
+      <li><strong>Ensure Good Lighting</strong>: Make sure the room is well-lit so the camera can clearly see your hand.</li>
+      <li><strong>Positioning</strong>: Keep your hand steady and fully visible in the frame.</li>
+      <li><strong>Practice Recognizable Signs</strong>: Some complex gestures may not be recognized without fine-tuning. Start with simple, commonly recognized signs, such as "Hello" or "Thank You."</li>
+      <li><strong>Camera Permissions</strong>: If you accidentally denied camera access, check your browser settings to enable it again.</li>
+    </ul>
+  </p>
+
+  <h3>5. Further Learning</h3>
+  <p>
+    Explore the <strong>ASL Resources</strong> section for additional tools, tutorials, and tips to improve your ASL proficiency.<br>
+    Familiarize yourself with common ASL gestures to enhance the detection accuracy and make your experience with 5enses Bridge smoother and more effective.
+  </p>
+
+  <h3>6. Share Feedback</h3>
+  <p>
+    Your feedback helps us improve! Visit the <strong>Feedback</strong> section to share your thoughts, suggestions, or any issues you encountered.
+  </p>
+
+  <p>Thank you for using 5enses Bridge! We’re here to help bridge the gap between hearing and non-hearing communities through accessible technology. Happy signing!</p>
+</div>
+
+
+
+
+  <!-- ASL Resources Page -->
+  <!-- ASL Resources Page -->
+<div id="aslResourcesPage" class="page hidden">
+  <h2>ASL Resources</h2>
+  <p>Explore helpful resources to learn and improve your American Sign Language (ASL) skills. These tools and platforms offer valuable content for both beginners and advanced learners.</p>
+
+
+  <h3>1. Organizations Supporting ASL</h3>
+  <p>Consider supporting these organizations that promote ASL education and accessibility for the Deaf and Hard of Hearing community:</p>
+  <ul>
+    <li><a href="https://www.nad.org" target="_blank">National Association of the Deaf (NAD)</a>: Advocates for the rights of Deaf individuals and promotes ASL education.</li>
+    <li><a href="https://www.handsandvoices.org" target="_blank">Hands & Voices</a>: Provides resources for families with children who are Deaf or Hard of Hearing.</li>
+    <li><a href="https://www.hearingloss.org" target="_blank">Hearing Loss Association of America (HLAA)</a>: Offers support and resources for individuals with hearing loss and their families.</li>
+    <li><a href="https://www.gallaudet.edu" target="_blank">Gallaudet University</a>: The leading university for Deaf and Hard of Hearing students, offering ASL courses and resources.</li>
+  </ul>
+
+  <h3>2. Donation</h3>
+  <p>Your support helps promote ASL education and accessibility. Consider making a donation to one of these organizations to support their mission:</p>
+  <ul>
+    <li><a href="https://www.nad.org/donate/" target="_blank">Donate to the National Association of the Deaf</a>: Support their efforts in advocating for ASL and Deaf rights.</li>
+    <li><a href="https://www.handsandvoices.org/get-involved/donate.htm" target="_blank">Donate to Hands & Voices</a>: Help provide resources and support for families with Deaf children.</li>
+    <li><a href="https://www.gallaudet.edu/giving-to-gallaudet/" target="_blank">Donate to Gallaudet University</a>: Support ASL education and Deaf research at the world’s premier institution for Deaf education.</li>
+    <li><a href="https://www.hearingloss.org/support-hlaa/donate/" target="_blank">Donate to Hearing Loss Association of America</a>: Aid programs that enhance accessibility and resources for people with hearing loss.</li>
+  </ul>
+
+  <h3>3. Additional Resources</h3>
+  <p>Explore other resources and communities to improve your ASL skills and connect with others:</p>
+  <ul>
+    <li><a href="https://www.reddit.com/r/asl/" target="_blank">ASL Subreddit</a>: Participate in discussions, ask questions, and find learning resources.</li>
+    <li><a href="https://asl.ms/" target="_blank">ASL.ms</a>: A quick ASL fingerspelling quiz site to help you improve your fingerspelling skills.</li>
+
+
+  <p>Thank you for supporting ASL education and accessibility. Together, we can create a more inclusive world for the Deaf and Hard of Hearing community!</p>
+</div>
+
+
+  <!-- Meet the Creators Page -->
+  <div id="meetTheCreatorsPage" class="page hidden">
+    <h2>Meet The Creators</h2>
+    <p>Learn about the passionate team behind the 5enses Bridge project.</p>
+  </div>
+
+
+  <!-- JavaScript logic -->
+  <script src="script.js"></script>
+</body>
+</html>
+
